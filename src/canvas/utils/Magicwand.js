@@ -1,6 +1,6 @@
 import { uniqWith, isEqual } from 'lodash-es';
 
-import { rgbaToObject } from '~utils/color';
+import { rgbaToObject } from '../utils/color';
 
 const BYTES = 4; // (시작점 * 4 -> ctx.getImageData() = rgba(0, 0, 0, 0) 4개 한묶음)
 

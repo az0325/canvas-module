@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import Shape from '../Shape';
 
-import { getIconColor } from '~utils/color';
-
+import { getIconColor } from '../utils/color';
 import { getColorArea, findColorArea, mergeImageData, getColorpickArea } from '../utils/Magicwand';
+import { getEdgeCoordinate } from '../utils/Canvas';
 
 class Background extends Shape {
 	backSpaceKey({ shape, labelPoint, mouse }) {

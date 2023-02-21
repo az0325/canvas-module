@@ -3,10 +3,10 @@ import Shape from '../Shape';
 
 import { differenceWith, isEqual } from 'lodash-es';
 
-import { OFFSET } from '~constants/enum';
-
-import { getIconColor } from '~utils/color';
+import { getIconColor } from '../utils/color';
 import { getEdgeCoordinate, moveShapes } from '../utils/Canvas';
+
+const OFFSET = 6;
 
 class Skeleton extends Shape {
 	mouseDown({ stage, shapeOpacity, shapeFill, shapeText, shape, labelPoint, type }) {

@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Shape from '../Shape';
 
-import { getIconColor } from '~utils/color';
+import { getIconColor } from '../utils/color';
 
 import { getEdgeCoordinate, isInOffset, moveShapes } from '../utils/Canvas';
 

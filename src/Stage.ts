@@ -1,14 +1,14 @@
 import Canvas from './Canvas';
-import Shape from './Shape';
+import Shape from './canvas/Shape';
 
-import Box from './Shapes/Box';
-import Pencil from './Shapes/Pencil';
-import Self from './Shapes/Self';
-import Vector from './Shapes/Vector';
-import Add from './Shapes/Add';
-import Erase from './Shapes/Erase';
-import Background from './Shapes/Background';
-import Skeleton from './Shapes/Skeleton';
+import Box from './canvas/Shapes/Box';
+import Pencil from './canvas/Shapes/Pencil';
+import Self from './canvas/Shapes/Self';
+import Vector from './canvas/Shapes/Vector';
+import Add from './canvas/Shapes/Add';
+import Erase from './canvas/Shapes/Erase';
+import Background from './canvas/Shapes/Background';
+import Skeleton from './canvas/Shapes/Skeleton';
 
 const shape = new Shape();
 const box = new Box();
@@ -21,6 +21,16 @@ const skeleton = new Skeleton();
 const erase = new Erase();
 
 class Stage extends Canvas {
+	_shape: Shape;
+	_box: Box;
+	_pencil: Pencil;
+	_vector: Vector;
+	_add: Add;
+	_background: Background;
+	_self: Self;
+	_skeleton: Skeleton;
+	_erase: Erase;
+
 	constructor() {
 		super();
 
@@ -71,16 +81,16 @@ class Stage extends Canvas {
 		return this._skeleton;
 	}
 
-	findShapes(type) {
-		if (type === 'box') return this._box;
-		if (type === 'pencil') return this._pencil;
-		if (type === 'vector') return this._vector;
-		if (type === 'self') return this._self;
-		if (type === 'add') return this._add;
-		if (type === 'background') return this._background;
-		if (type === 'erase') return this._erase;
-		if (type === 'skeleton') return this._skeleton;
-		return this._shape;
+	findShapes(type: string) {
+		if (type === 'box') return this.box;
+		if (type === 'pencil') return this.pencil;
+		if (type === 'vector') return this.vector;
+		if (type === 'self') return this.self;
+		if (type === 'add') return this.add;
+		if (type === 'background') return this.background;
+		if (type === 'erase') return this.erase;
+		if (type === 'skeleton') return this.skeleton;
+		return this.shape;
 	}
 }
 

@@ -1,5 +1,5 @@
-/* eslint-disable class-methods-use-this */
-import { getIconColor } from './utils/color';
+import { getIconColor } from './canvas/utils/color';
+import { IMouseDown, IMouseUp, IMouseMove, IBackSpaceKey, IResize, ISetEditData, IDrawNewShape, IDraw } from './common/types/Shape';
 
 const EDGE_COLOR = '#1c90fb';
 const EDGE_FOCUS_COLOR = '#ff0000';
@@ -17,7 +17,7 @@ class Shape {
 	 * @param labelPoint 도형 목록
 	 * @param type 도형 타입
 	 */
-	mouseDown({ stage, shapeOpacity, shapeFill, shapeText, shape, labelPoint, type }) {
+	mouseDown({ stage, shapeOpacity, shapeFill, shapeText, shape, labelPoint, type }: IMouseDown) {
 		return { newLabelPoint: labelPoint, newShape: shape };
 	}
 
@@ -32,7 +32,7 @@ class Shape {
 	 * @param shapeFill 도형 채울지 말지
 	 * @param shapeText 도형위에 글씨 쓸지말지
 	 */
-	async mouseUp({ stage, drawMove, shape, labelPoint, shapeOpacity, shapeFill, shapeText }) {
+	async mouseUp({ stage, drawMove, shape, labelPoint, shapeOpacity, shapeFill, shapeText }: IMouseUp) {
 		return { newDrawMove: drawMove, newLabelPoint: labelPoint, newShape: shape };
 	}
 
@@ -47,7 +47,7 @@ class Shape {
 	 * @param shapeFill 도형 채울지 말지
 	 * @param shapeText 도형위에 글씨 쓸지말지
 	 */
-	mouseMove({ stage, shape, offsetX, offsetY, mouse, shapeOpacity, shapeFill, shapeText }) {
+	mouseMove({ stage, shape, offsetX, offsetY, mouse, shapeOpacity, shapeFill, shapeText }: IMouseMove) {
 		return shape;
 	}
 
@@ -62,7 +62,7 @@ class Shape {
 	 * @param labelPoint 도형 목록
 	 * @param mouse 마우스 속성 값
 	 */
-	backSpaceKey({ shape, labelPoint, mouse }) {
+	backSpaceKey({ shape, labelPoint, mouse }: IBackSpaceKey) {
 		return { newLabelPoint: labelPoint, newMouse: mouse, delType: '' };
 	}
 
@@ -77,7 +77,7 @@ class Shape {
 	 * @param height 이미지 height
 	 * @param scale 리사이징 전 원본대비 비율
 	 */
-	async resizeEvent({ stage, shapeFill, point, ratio, width, height, scale }) {
+	async resizeEvent({ stage, shapeFill, point, ratio, width, height, scale }: IResize) {
 		return point;
 	}
 
@@ -89,7 +89,7 @@ class Shape {
 	 * @param height 이미지 height
 	 * @param scale 리사이징 전 원본대비 비율
 	 */
-	async setEditData({ item, width, height, scale }) {
+	async setEditData({ item, width, height, scale }: ISetEditData) {
 		return item.data_value;
 	}
 
@@ -109,7 +109,20 @@ class Shape {
 	 * @param shapeInfo 새로운 도형을 생성하기 위한 정보
 	 * @param labelData 라벨 레이어 정보 (self + background 에서 사용)
 	 */
-	async drawNewShape({ stage, offsetX, offsetY, shapeOpacity, shapeFill, shapeText, drawMove, shape, isUnion, focusLabel, shapeInfo, labelData }) {
+	async drawNewShape({
+		stage,
+		offsetX,
+		offsetY,
+		shapeOpacity,
+		shapeFill,
+		shapeText,
+		drawMove,
+		shape,
+		isUnion,
+		focusLabel,
+		shapeInfo,
+		labelData
+	}: IDrawNewShape) {
 		return { newDrawMove: drawMove, newLabelPoint: [], newShape: shape };
 	}
 
@@ -141,14 +154,14 @@ class Shape {
 		isNew = false,
 		useDraw = false,
 		ctxScreen = null
-	}) {}
+	}: IDraw) {}
 
 	/**
 	 * @description 캔버스에 이미지 그리기
 	 * @param stage
 	 * @param labelData 좌표값이 들어있는 현재 잡고있는 데이터
 	 */
-	drawCanvasImage(stage, labelData) {
+	drawCanvasImage(stage: any, labelData: any) {
 		const { ctxImage, canvasImage, width, height } = stage;
 
 		if (!width || !height) return;
@@ -166,7 +179,7 @@ class Shape {
 	 * @param ctx getContext
 	 * @param shape 도형 정보
 	 */
-	drawValue(ctx, shape) {
+	drawValue(ctx: any, shape: any) {
 		if (shape.value === '') return;
 
 		const drawValue = shape.value.length > 10 ? `${shape.value.slice(0, 9)}...` : shape.value;
@@ -193,7 +206,7 @@ class Shape {
 	 * @param ctx getContext
 	 * @param shape 도형 정보
 	 */
-	drawSquareEdge(ctx, shape) {
+	drawSquareEdge(ctx: any, shape: any) {
 		ctx.save();
 
 		ctx.strokeStyle = EDGE_LINE_COLOR;
@@ -214,7 +227,7 @@ class Shape {
 	 * @param y y 좌표
 	 * @param isRed 모서리 색 (빨간색 줄지 말지)
 	 */
-	drawEdge(ctx, x, y, isRed = false) {
+	drawEdge(ctx: any, x: number, y: number, isRed: boolean = false) {
 		const color = isRed ? EDGE_FOCUS_COLOR : EDGE_COLOR;
 
 		ctx.save();

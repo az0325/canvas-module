@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Shape from '../Shape';
 
-import { getIconColor, changeOpacity } from '~utils/color';
+import { getIconColor, changeOpacity } from '../utils/color';
 import { findColorArea, mergeImageData, getColorpickArea, transferToCoords } from '../utils/Magicwand';
 import { getEdgeCoordinate } from '../utils/Canvas';
 

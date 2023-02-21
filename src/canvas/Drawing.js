@@ -1,6 +1,9 @@
-import { EDGE_COLOR, EDGE_FOCUS_COLOR, EDGE_LINE_COLOR, EDGE_IN_COLOR } from '~constants/enum';
+import { getIconColor } from './utils/color';
 
-import { getIconColor } from '~utils/color';
+const EDGE_COLOR = '#1c90fb';
+const EDGE_FOCUS_COLOR = '#ff0000';
+const EDGE_LINE_COLOR = '#1c90fb';
+const EDGE_IN_COLOR = '#ffffff';
 
 const Drawing = {
 	/**

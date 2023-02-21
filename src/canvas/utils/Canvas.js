@@ -1,6 +1,6 @@
 import { uniqBy, identity } from 'lodash-es';
 
-import { OFFSET } from '~constants/enum';
+const OFFSET = 6;
 
 const deepClone = (obj) => {
 	const newObj = obj?.push ? [] : {};
@@ -119,10 +119,10 @@ const getEdgeCoordinate = (coords) => {
  * @description 이미지 비율
  * @param shape 이미지 정보
  */
-const getScale = ({ shape, file_url }) => {
+const getScale = ({ shape, imageUrl }) => {
 	const { width, height } = shape;
 
-	const parentId = file_url === '' ? 'editBox' : 'addImg';
+	const parentId = imageUrl === '' ? 'editBox' : 'addImg';
 	const parentEl = document.getElementById(parentId);
 
 	if (!parentEl) return { width: 0, height: 0, scale: 1 };

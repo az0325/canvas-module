@@ -1,11 +1,11 @@
 /* eslint-disable class-methods-use-this */
 import Shape from '../Shape';
 
-import { OFFSET } from '~constants/enum';
-
-import { getIconColor } from '~utils/color';
+import { getIconColor } from '../utils/color';
 
 import { getEdgeCoordinate, moveShapes } from '../utils/Canvas';
+
+const OFFSET = 6;
 
 class Box extends Shape {
 	mouseDown({ stage, shapeOpacity, shapeFill, shapeText, shape, labelPoint, type }) {

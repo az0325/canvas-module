@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Shape from '../Shape';
 
-import { changeOpacity } from '~utils/color';
+import { changeOpacity } from '../utils/color';
 import { mergeImageData, getColorpickArea, findSegmentArea } from '../utils/Magicwand';
 
 // NOTE self가 자동병합되지 않았을 때, union으로 병합시켜주던 툴 (지금은 자동병합이라 사용 안함)
