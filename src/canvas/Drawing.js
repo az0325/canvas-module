@@ -15,12 +15,12 @@ const Drawing = {
 		const { ctxImage, canvasImage, width, height } = stage;
 
 		if (!width || !height) return;
-		if (!labelData.file_data || labelData.shape.width <= 1 || labelData.shape.height <= 1) return;
+		if (!labelData.data || labelData.shape.width <= 1 || labelData.shape.height <= 1) return;
 
 		ctxImage.filter = `brightness(${labelData.level + 100}%)`;
 		ctxImage.beginPath();
 		ctxImage.clearRect(0, 0, canvasImage.width, canvasImage.height);
-		ctxImage.drawImage(labelData.file_data, 0, 0, canvasImage.width, canvasImage.height);
+		ctxImage.drawImage(labelData.data, 0, 0, canvasImage.width, canvasImage.height);
 		ctxImage.closePath();
 	},
 

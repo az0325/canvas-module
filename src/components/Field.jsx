@@ -5,7 +5,7 @@ import { isEqual } from 'lodash-es';
 import Stage from '../canvas/Stage';
 import Drawing from '../canvas/Drawing';
 
-import { deepClone, findCurrentArea, getEdgeCoordinate } from '../canvas/utils/Canvas';
+import { deepClone, findCurrentArea, getEdgeCoordinate, getScale } from '../canvas/utils/Canvas';
 
 import { changeOpacity } from '../canvas/utils/color';
 
@@ -79,18 +79,14 @@ const Field = (props) => {
 
 	useEffect(() => {
 		// 캔버스 영역 초기 세팅
-		console.log(imageData);
-		if ((imageData && !stage.width && !stage.height) || (stage.width < 2 && stage.height < 2)) {
-			if (imageData?.imageUrl) {
-				const addImg = document.getElementById('addImg');
-				const { height: parentHeight, width: parentWidth } = addImg.getBoundingClientRect();
-				const { width, height } = imageData.shape;
-				stage.setStage({ parentId: 'addImg', width, height, scale: imageData.scale, parentHeight, parentWidth });
-				stage.addMouseEvent(handleMouseEvent);
-				Drawing.drawCanvasImage(stage, { ..._labelData.current, ...imageData });
-				console.log(stage);
-				_imageData.current = { ...imageData };
-			}
+		if (imageData?.imageUrl) {
+			const addImg = document.getElementById('addImg');
+			const { height: parentHeight, width: parentWidth } = addImg.getBoundingClientRect();
+			const { width, height, scale } = getScale(imageData);
+			stage.setStage({ parentId: 'addImg', width, height, scale, parentHeight, parentWidth });
+			stage.addMouseEvent(handleMouseEvent);
+			Drawing.drawCanvasImage(stage, { ..._labelData.current, ...imageData });
+			_imageData.current = { ...imageData };
 		}
 	}, [imageData]);
 
@@ -702,7 +698,11 @@ const Field = (props) => {
 
 	// const imageData = imageStore.labelData && imageStore.imageList.find((item) => item.selected_data_id === imageStore.labelData.selected_data_id);
 
-	return <div className="canvasBox" id="addImg" style={{ overflow: 'auto', display: imageData?.imageUrl === '' ? 'none' : '' }} />;
+	return (
+		<div style={{ position: 'static', height: '800px' }}>
+			<div id="addImg" style={{ overflow: 'auto', height: 'inherit' }} />
+		</div>
+	);
 };
 
 export default Field;
